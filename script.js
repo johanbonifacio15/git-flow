@@ -90,6 +90,10 @@ function mmToCm(value) {
         document.getElementById("result").innerText = "Por favor, seleccione una conversión válida.";
         return;
     }
+    const resultContainer = document.getElementById("result-container");
+    const resultText = document.getElementById("result");
   
     document.getElementById("result").innerText = `Resultado: ${result.toFixed(2)} ${unit}`;
+
+    resultContainer.classList.add("show");
   }
