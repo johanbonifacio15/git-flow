@@ -62,3 +62,9 @@ button:hover {
   opacity: 1;
   transform: translateY(0);
 }
+
+#result-container.error {
+  background-color: #ffe6e6;
+  color: #cc0000; 
+  border-color: #cc0000; 
+}
