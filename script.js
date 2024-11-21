@@ -38,10 +38,32 @@ function mmToCm(value) {
     return value / 2.54;
   }
   
-  function convert() {
-    const value = parseFloat(document.getElementById("value").value);
-    const conversionType = document.getElementById("conversion-type").value;
+  function showError(message) {
+    const resultContainer = document.getElementById("result-container");
+    const resultText = document.getElementById("result");
   
+    resultText.innerText = message;
+    resultContainer.classList.add("show");
+    resultContainer.style.backgroundColor = "#ffe6e6"; 
+    resultContainer.style.color = "#cc0000"; 
+  }
+  
+  function clearError() {
+    const resultContainer = document.getElementById("result-container");
+    resultContainer.style.backgroundColor = "#e9f7ff"; 
+    resultContainer.style.color = "#007BFF";
+  }
+  
+  function convert() {
+    const valueInput = document.getElementById("value");
+    const conversionType = document.getElementById("conversion-type").value;
+    // Validacion
+    const value = parseFloat(valueInput.value);
+    if (isNaN(value) || valueInput.value.trim() === "") {
+        showError("Por favor, ingrese un valor numérico válido.");
+        return;
+      }
+    // Conversiones
     let result;
     let unit;
   
@@ -87,11 +109,17 @@ function mmToCm(value) {
         unit = "in";
         break;
       default:
-        document.getElementById("result").innerText = "Por favor, seleccione una conversión válida.";
+        showError("Por favor, seleccione un tipo de conversión válido.");
         return;
     }
+    // Resultado
+    clearError();
     const resultContainer = document.getElementById("result-container");
     const resultText = document.getElementById("result");
+  
+    resultText.innerText = `Resultado: ${result.toFixed(2)} ${unit}`;
+    resultContainer.classList.add("show");
+  }
   
     document.getElementById("result").innerText = `Resultado: ${result.toFixed(2)} ${unit}`;
 
